@@ -13,7 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-import java.util.ArrayDeque;
+import com.facanditu.fcdtandroid.util.SharedPreferenceManager;
+
 import java.util.ArrayList;
 
 

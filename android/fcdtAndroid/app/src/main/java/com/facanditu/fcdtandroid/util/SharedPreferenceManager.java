@@ -1,4 +1,4 @@
-package com.facanditu.fcdtandroid;
+package com.facanditu.fcdtandroid.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
