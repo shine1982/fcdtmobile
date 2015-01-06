@@ -57,7 +57,7 @@ public class NewAdapter extends BaseExpandableListAdapter {
             MenuItem menuItem = tempChild.get(childPosition);
             title.setText(menuItem.getTitle());
             image.setImageResource(menuItem.getIcon());
-            convertView.setTag(tempChild.get(childPosition));
+            convertView.setTag(menuItem.getTagValue());
             convertView.setBackgroundColor(context.getResources().getColor(R.color.colorPrimaryDark));
 
         }
@@ -114,7 +114,7 @@ public class NewAdapter extends BaseExpandableListAdapter {
         MenuItem menuItem = groupItem.get(groupPosition);
         title.setText(menuItem.getTitle());
         image.setImageResource(menuItem.getIcon());
-		convertView.setTag(groupItem.get(groupPosition));
+		convertView.setTag(menuItem.getTagValue());
 		return convertView;
 	}
 

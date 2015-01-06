@@ -42,7 +42,7 @@ public abstract class GenericFcdtActivity  extends ActionBarActivity {
         return toolbar;
     }
 
-    protected void hideSearchingBloc(){
+    public void hideSearchingBloc(){
         View searchingBloc = findViewById(R.id.loadingPanel);
         searchingBloc.setVisibility(View.GONE);
     }

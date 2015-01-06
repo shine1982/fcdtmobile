@@ -27,8 +27,10 @@ public class FcdtApplication extends Application {
         Parse.enableLocalDatastore(this);
 
         // Add your initialization code here
-        Parse.initialize(this, "iwGsOVQf75GczDN5rbPWBnpVjRnihfldbFx7wpYq", "wKBBV1YRfnwRp1Uv8nnuSYmTj8R174SEbi2vOjVz");
-
+       //DEV
+       // Parse.initialize(this, "iwGsOVQf75GczDN5rbPWBnpVjRnihfldbFx7wpYq", "wKBBV1YRfnwRp1Uv8nnuSYmTj8R174SEbi2vOjVz");
+        //PROD
+        Parse.initialize(this, "5vMNOUenvBCpf5y8biVWDFcdkDks40WdwV8T7JrA", "o0EoYMF7RMkX00MmxTtp78G7xCUbupO3PFrNStyI");
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
         // If you would like all objects to be private by default, remove this line.

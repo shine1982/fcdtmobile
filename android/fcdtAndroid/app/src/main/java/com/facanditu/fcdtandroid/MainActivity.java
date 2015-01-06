@@ -2,6 +2,7 @@ package com.facanditu.fcdtandroid;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.facanditu.fcdtandroid.screen.searchresto.SearchNavigator;
 import com.facanditu.fcdtandroid.screen.searchresto.SearchRestosActivity;
 import com.facanditu.fcdtandroid.screen.searchresto.SearchRestosType;
 
@@ -19,7 +21,7 @@ public class MainActivity extends ActionBarActivity {
 
     private Toolbar toolbar;
 
-    private ImageButton mGeoLoc, mFav, mSearchByCat, mFcbk;
+    private ImageButton mGeoLoc, mFav, mSearchByCat, mWikiFrCook;
 
 
 
@@ -41,6 +43,27 @@ public class MainActivity extends ActionBarActivity {
         drawerFragment.setUp(R.id.drawer_navigation, (DrawerLayout) findViewById( R.id.drawer_layout), toolbar);
 
         initGeoLocButton(this);
+        initFavButton(this);
+        initSearchRestosByCat(this);
+        initWikiFrCook(this);
+    }
+
+    private void initWikiFrCook(MainActivity mainActivity) {
+        mWikiFrCook=(ImageButton)findViewById(R.id.wikiFrCook);
+    }
+
+    private void initSearchRestosByCat(MainActivity mainActivity) {
+        mSearchByCat=(ImageButton)findViewById(R.id.searchRestosByCat);
+    }
+
+    private void initFavButton(final MainActivity mainActivity) {
+        mFav=(ImageButton)findViewById(R.id.favRestos);
+        mFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchNavigator.goTo(mainActivity,SearchRestosType.Fav);
+            }
+        });
     }
 
 
@@ -49,10 +72,7 @@ public class MainActivity extends ActionBarActivity {
         mGeoLoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, SearchRestosActivity.class);
-                intent.putExtra(SearchRestosActivity.SEARCH_TYPE_NAME, SearchRestosType.NearBy.name());
-                startActivity(intent);
-
+                SearchNavigator.goTo(activity,SearchRestosType.NearBy);
             }
         });
     }

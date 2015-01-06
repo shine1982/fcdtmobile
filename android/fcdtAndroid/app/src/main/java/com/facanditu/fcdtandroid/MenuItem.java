@@ -7,6 +7,7 @@ public class MenuItem {
 
     private int icon;
     private String title;
+    private String tagValue;
 
     public int getIcon() {
         return icon;
@@ -24,8 +25,17 @@ public class MenuItem {
         this.title = title;
     }
 
-    public MenuItem(int icon, String title) {
+    public String getTagValue() {
+        return tagValue;
+    }
+
+    public void setTagValue(String tagValue) {
+        this.tagValue = tagValue;
+    }
+
+    public MenuItem(int icon, String title, String tagValue) {
         this.icon = icon;
         this.title = title;
+        this.tagValue = tagValue;
     }
 }
