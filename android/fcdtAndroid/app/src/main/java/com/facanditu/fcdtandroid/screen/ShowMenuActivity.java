@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.facanditu.fcdtandroid.R;
 import com.facanditu.fcdtandroid.model.Dish;
 import com.facanditu.fcdtandroid.model.DishItem;
+import com.facanditu.fcdtandroid.model.DishItemHelper;
 import com.facanditu.fcdtandroid.model.DishType;
 import com.facanditu.fcdtandroid.model.Restaurant;
 import com.facanditu.fcdtandroid.util.StringUtils;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ShowMenuActivity extends ActionBarActivity {
+public class ShowMenuActivity extends GenericFcdtActivity {
 
     private Toolbar toolbar;
     private ListView menuListView;
@@ -47,10 +48,7 @@ public class ShowMenuActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_menu);
-
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar = initToolbar();
 
         menuListView = (ListView) findViewById(R.id.dishList);
         Bundle bundle = getIntent().getExtras();
@@ -58,13 +56,10 @@ public class ShowMenuActivity extends ActionBarActivity {
         final String lang = bundle.getString(LANG);
         final Context thisActivity = this;
 
-        final ParseQuery<Dish> dishParseQuery = Dish.getQuery();
-        dishParseQuery.whereEqualTo(Restaurant.FOREIGNE_KEY, Restaurant.newRestaurantWithoutData(idResto));
-
-        dishParseQuery.findInBackground(new FindCallback<Dish>() {
+        Dish.getQuery(idResto).findInBackground(new FindCallback<Dish>() {
             @Override
             public void done(List<Dish> dishs, ParseException e) {
-                final List<DishItem> dishItems = getDishItemList(dishs);
+                final List<DishItem> dishItems = DishItemHelper.convertDishListToDishItemList(dishs);
                 final DishLangMode dishLangMode = DishLangMode.valueOf(lang);
                 DishItemAdapter dishItemAdapter = new DishItemAdapter(thisActivity, dishItems, dishLangMode);
                 menuListView.setAdapter(dishItemAdapter);
@@ -72,69 +67,20 @@ public class ShowMenuActivity extends ActionBarActivity {
                 menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        final DishItem dishItem = dishItems.get(position);
+                        final DishItem dishItem = (DishItem) parent.getItemAtPosition(position);
                         Toast.makeText(thisActivity, dishItem.getInverseName(dishLangMode)
-                                +(dishItem.isTitle()?"":" "+
-                                dishItem.getInversePriceLabel(dishLangMode)),Toast.LENGTH_LONG).show();
+                                + (dishItem.isTitle() ? "" : " " +
+                                dishItem.getInversePriceLabel(dishLangMode)), Toast.LENGTH_LONG).show();
                     }
                 });
                 hideSearchingBloc();
             }
         });
-
-
-    }
-
-    private List<DishItem> getDishItemList(List<Dish> dishs){
-
-        List<DishItem> dishItems=new ArrayList<>();
-
-        DishType[] dishTypes = DishType.values();
-        for (final DishType dishType: dishTypes){
-
-            dishItems.add(new DishItem(dishType.getCnName(),dishType.getFrName(),"", true));
-
-
-            final List<Dish> dishsTemp =
-                    ListUtils.select(dishs, new Predicate<Dish>() {
-                @Override
-                public boolean evaluate(Dish dish) {
-                    return dishType.getType().equals(dish.getDishType());
-                }
-            });
-
-            for (final Dish dish : dishsTemp){
-                dishItems.add(new DishItem(dish.getCnName(),dish.getFrName(),getPriceToShow(dish),false));
-            }
-        }
-        return dishItems;
-    }
-
-    private String getPriceToShow(Dish dish){
-        return dish.getPriceEuro()+(StringUtils.isEmpty(dish.getPriceCentimes())?"":"."+dish.getPriceCentimes());
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_show_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-
-    }
-    private void hideSearchingBloc(){
-        View searchingBloc = findViewById(R.id.loadingPanel);
-        searchingBloc.setVisibility(View.GONE);
+    protected int getMenu() {
+        return R.menu.menu_show_menu;
     }
 }
 

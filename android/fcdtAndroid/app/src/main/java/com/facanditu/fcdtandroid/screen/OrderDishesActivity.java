@@ -3,6 +3,7 @@ package com.facanditu.fcdtandroid.screen;
 import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
@@ -19,33 +20,25 @@ import com.facanditu.fcdtandroid.util.StringUtils;
 
 import java.util.List;
 
-public class OrderDishesActivity extends ActionBarActivity {
+public class OrderDishesActivity extends GenericFcdtActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_dishes);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_order_dishes, menu);
-        return true;
+        initToolbar();
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    protected int getMenu(){
+        return R.menu.menu_order_dishes;
     }
+
+
+
+
 }
 
 

@@ -39,4 +39,10 @@ public class Dish extends ParseObject {
     public static ParseQuery<Dish> getQuery() {
         return ParseQuery.getQuery(Dish.class).orderByAscending("order");
     }
+
+    public static ParseQuery<Dish> getQuery(String idResto) {
+        ParseQuery<Dish> parseQuery = Dish.getQuery();
+        parseQuery.whereEqualTo(Restaurant.FOREIGNE_KEY, Restaurant.newRestaurantWithoutData(idResto));
+        return parseQuery;
+    }
 }

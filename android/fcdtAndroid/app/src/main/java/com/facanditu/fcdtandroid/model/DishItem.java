@@ -74,4 +74,6 @@ public class DishItem {
     public String getInversePriceLabel(final DishLangMode dishLangMode){
         return DishLangMode.FR.equals(dishLangMode)?getCnPrice():getFrPrice();
     }
+
+
 }

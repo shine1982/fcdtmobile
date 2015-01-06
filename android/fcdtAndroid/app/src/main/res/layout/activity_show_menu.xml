@@ -16,6 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dishList"
-        android:layout_below="@id/app_bar"/>
+        android:layout_below="@id/app_bar"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"/>
 
 </RelativeLayout>

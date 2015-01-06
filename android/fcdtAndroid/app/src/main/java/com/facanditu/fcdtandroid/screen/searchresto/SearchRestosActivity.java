@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.facanditu.fcdtandroid.R;
 import com.facanditu.fcdtandroid.model.Restaurant;
 import com.facanditu.fcdtandroid.model.RestaurantBO;
+import com.facanditu.fcdtandroid.screen.GenericFcdtActivity;
 import com.facanditu.fcdtandroid.screen.restaurant.RestaurantMainActivity;
 import com.facanditu.fcdtandroid.util.GeoUtils;
 import com.facanditu.fcdtandroid.util.LocationUtils;
@@ -32,15 +33,13 @@ import com.parse.ParseQueryAdapter;
 
 import java.util.List;
 
-public class SearchRestosActivity extends ActionBarActivity implements
+public class SearchRestosActivity extends GenericFcdtActivity implements
 
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     public static final String SEARCH_TYPE_NAME="searchType";
     public final static int
             CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
-
-    private Toolbar toolbar;
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -61,10 +60,7 @@ public class SearchRestosActivity extends ActionBarActivity implements
             searchType=
                     getIntent().getExtras().getString(SEARCH_TYPE_NAME);
 
-            toolbar = (Toolbar) findViewById(R.id.app_bar);
-            setSupportActionBar(toolbar);
-
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            initToolbar();
 
             TextView textView = (TextView) findViewById(R.id.searchTypeTitle);
             textView.setText(searchType);
@@ -88,11 +84,10 @@ public class SearchRestosActivity extends ActionBarActivity implements
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search_restos, menu);
-        return true;
+    protected int getMenu() {
+        return R.menu.menu_search_restos;
     }
+
 
     @Override
     protected void onStart() {
@@ -108,17 +103,6 @@ public class SearchRestosActivity extends ActionBarActivity implements
     public void onStop() {
         mGoogleApiClient.disconnect();
         super.onStop();
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -172,10 +156,6 @@ public class SearchRestosActivity extends ActionBarActivity implements
         }
     }
 
-    private void hideSearchingBloc(){
-        searchingBloc = findViewById(R.id.loadingPanel);
-        searchingBloc.setVisibility(View.GONE);
-    }
 
 
 
