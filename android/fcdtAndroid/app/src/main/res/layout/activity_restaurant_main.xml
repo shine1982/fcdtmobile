@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.facanditu.fcdtandroid.screen.RestaurantMainActivity">
+    tools:context="com.facanditu.fcdtandroid.screen.restaurant.RestaurantMainActivity">
 
     <include
         android:id="@+id/app_bar"
@@ -9,15 +9,27 @@
     </include>
 
     <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/app_bar"
+        android:name="com.facanditu.fcdtandroid.screen.restaurant.HomeFragment"
+        android:id="@+id/photosResto"
+        />
+
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:name="com.facanditu.fcdtandroid.screen.ShowRestoFragment"
+        android:layout_below="@id/photosResto">
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="com.facanditu.fcdtandroid.screen.restaurant.ShowRestoFragment"
         android:id="@+id/fragment"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
 
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@id/app_bar"/>
-
+        android:layout_below="@id/photosResto"/>
+    </ScrollView>
 </RelativeLayout>

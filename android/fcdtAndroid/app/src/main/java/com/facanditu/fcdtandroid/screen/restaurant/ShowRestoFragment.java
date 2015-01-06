@@ -1,4 +1,4 @@
-package com.facanditu.fcdtandroid.screen;
+package com.facanditu.fcdtandroid.screen.restaurant;
 
 
 import android.app.Activity;
@@ -10,11 +10,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facanditu.fcdtandroid.R;
 import com.facanditu.fcdtandroid.model.RestaurantBO;
+import com.facanditu.fcdtandroid.screen.DishLangMode;
+import com.facanditu.fcdtandroid.screen.OrderDishesActivity;
+import com.facanditu.fcdtandroid.screen.ShowMenuActivity;
+import com.facanditu.fcdtandroid.screen.searchresto.RestaurantBoHelper;
 import com.facanditu.fcdtandroid.util.FavRestoManager;
+
+import org.w3c.dom.Text;
+
+import java.util.List;
 
 
 /**
@@ -27,6 +36,16 @@ public class ShowRestoFragment extends Fragment {
     private ImageButton favoriteRestoButton;
     private ImageButton callButton;
     private ImageButton openMapButton;
+    private ImageButton orderDishesButton;
+
+    private TextView restoNameTV;
+    private TextView restoAddressTV;
+    private LinearLayout opentime;
+    private LinearLayout price;
+    private LinearLayout recReasons;
+
+    private TextView cnMenu;
+    private TextView frMenu;
 
     private RestaurantBoHelper restaurantBoHelper;
 
@@ -47,7 +66,6 @@ public class ShowRestoFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final String idResto = getActivity().getIntent().getExtras().getString("idResto");
         restaurant = restaurantBoHelper.getResto();
         updateUI();
     }
@@ -71,14 +89,19 @@ public class ShowRestoFragment extends Fragment {
 
 
     public void updateUI(){
-        TextView restoNameTV = (TextView) view.findViewById(R.id.restoNameLabel);
-        TextView restoAddressTV = (TextView) view.findViewById(R.id.restoAddress);
+        restoNameTV = (TextView) view.findViewById(R.id.restoNameLabel);
+        restoAddressTV = (TextView) view.findViewById(R.id.restoAddress);
         restoNameTV.setText(restaurant.getName());
         restoAddressTV.setText(restaurant.getAddress() +", "+restaurant.getPostalCode()+", "+restaurant.getCity());
 
         setFavoriteButton();
         setCallButton();
         setOpenMapButton();
+        setOrderDishesButton();
+        setOpenTime();
+        setPrice();
+        setRecReasons();
+        setChAndFrMenuClickAction();
     }
     private void setFavoriteButton(){
         final FavRestoManager favRestoManager =  FavRestoManager.getInstance(getActivity());
@@ -100,7 +123,6 @@ public class ShowRestoFragment extends Fragment {
                     favRestoManager.addFavResto(idResto);
                     isFavNow = true;
                 }
-
                 favoriteRestoButton.setImageResource(isFavNow?R.drawable.ic_like_50:R.drawable.ic_like_outline_50);
 
             }
@@ -134,4 +156,71 @@ public class ShowRestoFragment extends Fragment {
             }
         });
     }
+
+    private void setOrderDishesButton(){
+        orderDishesButton = (ImageButton)view.findViewById(R.id.orderDishes);
+        orderDishesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), OrderDishesActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void setOpenTime(){
+        opentime=(LinearLayout)view.findViewById(R.id.opentime);
+        addTextViewToLinerLayout( restaurant.getFullOpenTime() , opentime);
+    }
+
+    private void setPrice(){
+        price=(LinearLayout)view.findViewById(R.id.price);
+        addTextViewToLinerLayout( restaurant.getPrice(), price);
+    }
+
+    private void setRecReasons(){
+        recReasons = (LinearLayout)view.findViewById(R.id.recReason);
+        addTextViewToLinerLayout( restaurant.getRecReasons() , recReasons);
+    }
+
+    private void addTextViewToLinerLayout(final List<String> strings, final LinearLayout linearLayout){
+        for(final String opentimestr : strings ){
+            ViewGroup.LayoutParams lparams = new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            final TextView tv=new TextView(this.getActivity());
+            tv.setLayoutParams(lparams);
+            tv.setText(opentimestr);
+            linearLayout.addView(tv);
+        }
+    }
+
+    private void setChAndFrMenuClickAction(){
+        cnMenu = (TextView) view.findViewById(R.id.menuCnBtn);
+        frMenu = (TextView) view.findViewById(R.id.menuFrBtn);
+
+        cnMenu.setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startMenuActivity(DishLangMode.CN);
+                }
+            }
+        );
+        frMenu.setOnClickListener(
+                new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startMenuActivity(DishLangMode.FR);
+            }
+        });
+    }
+
+    private void startMenuActivity(final DishLangMode dishLangMode){
+        Intent intent = new Intent(getActivity(), ShowMenuActivity.class);
+        intent.putExtra(ShowMenuActivity.ID_RESTO, restaurant.getId());
+        intent.putExtra(ShowMenuActivity.LANG, dishLangMode.name());
+        startActivity(intent);
+    }
+
+
 }

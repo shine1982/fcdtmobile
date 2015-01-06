@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".screen.SearchRestosActivity"
+            android:name=".screen.searchresto.SearchRestosActivity"
             android:label="@string/title_activity_search_restos"
             android:parentActivityName=".MainActivity" >
             <meta-data
@@ -35,12 +35,20 @@
                 android:value="com.facanditu.fcdtandroid.MainActivity" />
         </activity>
         <activity
-            android:name=".screen.RestaurantMainActivity"
+            android:name=".screen.restaurant.RestaurantMainActivity"
             android:label="@string/title_activity_restaurant_main"
-            android:parentActivityName=".screen.SearchRestosActivity" >
+            android:parentActivityName=".screen.searchresto.SearchRestosActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.facanditu.fcdtandroid.screen.SearchRestosActivity" />
+                android:value=".screen.searchresto.SearchRestosActivity" />
+        </activity>
+        <activity
+            android:name=".screen.OrderDishesActivity"
+            android:label="@string/title_activity_order_dishes" >
+        </activity>
+        <activity
+            android:name=".screen.ShowMenuActivity"
+            android:label="@string/title_activity_show_menu" >
         </activity>
     </application>
 

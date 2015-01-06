@@ -1,4 +1,4 @@
-package com.facanditu.fcdtandroid.screen;
+package com.facanditu.fcdtandroid.screen.searchresto;
 
 
 import com.facanditu.fcdtandroid.model.RestaurantBO;

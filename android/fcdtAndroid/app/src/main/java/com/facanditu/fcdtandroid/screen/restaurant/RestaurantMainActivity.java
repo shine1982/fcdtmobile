@@ -1,7 +1,6 @@
-package com.facanditu.fcdtandroid.screen;
+package com.facanditu.fcdtandroid.screen.restaurant;
 
 import android.content.Intent;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +9,7 @@ import android.view.MenuItem;
 
 import com.facanditu.fcdtandroid.R;
 import com.facanditu.fcdtandroid.model.RestaurantBO;
+import com.facanditu.fcdtandroid.screen.searchresto.RestaurantBoHelper;
 
 public class RestaurantMainActivity extends ActionBarActivity implements RestaurantBoHelper {
 
@@ -25,7 +25,6 @@ public class RestaurantMainActivity extends ActionBarActivity implements Restaur
 
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();

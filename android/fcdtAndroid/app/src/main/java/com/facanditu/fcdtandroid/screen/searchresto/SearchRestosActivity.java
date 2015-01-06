@@ -1,4 +1,4 @@
-package com.facanditu.fcdtandroid.screen;
+package com.facanditu.fcdtandroid.screen.searchresto;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -6,13 +6,9 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.os.PersistableBundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,17 +20,16 @@ import android.widget.TextView;
 import com.facanditu.fcdtandroid.R;
 import com.facanditu.fcdtandroid.model.Restaurant;
 import com.facanditu.fcdtandroid.model.RestaurantBO;
+import com.facanditu.fcdtandroid.screen.restaurant.RestaurantMainActivity;
 import com.facanditu.fcdtandroid.util.GeoUtils;
 import com.facanditu.fcdtandroid.util.LocationUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 
-import java.text.ParseException;
 import java.util.List;
 
 public class SearchRestosActivity extends ActionBarActivity implements
@@ -120,7 +115,7 @@ public class SearchRestosActivity extends ActionBarActivity implements
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

@@ -1,4 +1,4 @@
-package com.facanditu.fcdtandroid.screen;
+package com.facanditu.fcdtandroid.screen.searchresto;
 
 import android.content.Context;
 import android.location.Location;

@@ -1,17 +1,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.facanditu.fcdtandroid.screen.searchresto.SearchRestosActivity">
+    tools:context="com.facanditu.fcdtandroid.screen.ShowMenuActivity">
 
     <include
         android:id="@+id/app_bar"
         layout="@layout/app_bar">
     </include>
-
-    <TextView android:text="" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/searchTypeTitle"
-        android:layout_below="@id/app_bar"/>
 
     <include layout="@layout/searching"
         android:id="@+id/loadingPanel"/>
@@ -20,7 +15,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/restosList"
-        android:layout_below="@id/searchTypeTitle"/>
+        android:id="@+id/dishList"
+        android:layout_below="@id/app_bar"/>
 
 </RelativeLayout>

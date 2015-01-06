@@ -2,6 +2,8 @@ package com.facanditu.fcdtandroid;
 
 import android.app.Application;
 
+import com.facanditu.fcdtandroid.model.Dish;
+import com.facanditu.fcdtandroid.model.Photo;
 import com.facanditu.fcdtandroid.model.Restaurant;
 import com.parse.Parse;
 import com.parse.ParseACL;
@@ -20,6 +22,8 @@ public class FcdtApplication extends Application {
         super.onCreate();
 
         ParseObject.registerSubclass(Restaurant.class);
+        ParseObject.registerSubclass(Photo.class);
+        ParseObject.registerSubclass(Dish.class);
         Parse.enableLocalDatastore(this);
 
         // Add your initialization code here
