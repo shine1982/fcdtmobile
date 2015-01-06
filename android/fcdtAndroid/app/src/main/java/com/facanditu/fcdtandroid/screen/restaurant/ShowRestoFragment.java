@@ -163,6 +163,7 @@ public class ShowRestoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), OrderDishesActivity.class);
+                intent.putExtra(OrderDishesActivity.ID_RESTO,restaurant.getId());
                 startActivity(intent);
             }
         });

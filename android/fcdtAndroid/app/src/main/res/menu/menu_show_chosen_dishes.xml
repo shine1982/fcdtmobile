@@ -1,11 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.facanditu.fcdtandroid.screen.OrderDishesActivity">
+    tools:context="com.facanditu.fcdtandroid.screen.ShowChosenDishesActivity">
 
-    <item android:id="@+id/action_ok_for_chosen_dishes"
-        android:title="OK,我选好了:)"
+    <item android:id="@+id/orderInFrench"
+        android:title="法语语音点菜"
 
-        android:icon="@drawable/ic_wink_50"
+        android:icon="@drawable/ic_speaker_50"
         app:showAsAction="always|withText" />
 </menu>

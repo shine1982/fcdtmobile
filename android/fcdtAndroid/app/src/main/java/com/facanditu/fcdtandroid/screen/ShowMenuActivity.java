@@ -38,7 +38,6 @@ import java.util.List;
 
 public class ShowMenuActivity extends GenericFcdtActivity {
 
-    private Toolbar toolbar;
     private ListView menuListView;
 
     public static final String ID_RESTO="idResto";
@@ -48,7 +47,8 @@ public class ShowMenuActivity extends GenericFcdtActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_menu);
-        toolbar = initToolbar();
+
+        initToolbar();
 
         menuListView = (ListView) findViewById(R.id.dishList);
         Bundle bundle = getIntent().getExtras();

@@ -2,20 +2,24 @@ package com.facanditu.fcdtandroid.model;
 
 import com.facanditu.fcdtandroid.screen.DishLangMode;
 
+import java.io.Serializable;
+
 /**
  * Created by fengqin on 15/1/6.
  */
-public class DishItem {
+public class DishItem implements Serializable{
 
     private String cnName;
     private String frName;
     private String price;
     private boolean isTitle;
+    private String type;
 
-    public DishItem(String cnName, String frName, String price, boolean isTitle) {
+    public DishItem(String cnName, String frName, String price, String type, boolean isTitle) {
         this.cnName = cnName;
         this.frName = frName;
         this.price = price;
+        this.type = type;
         this.isTitle = isTitle;
     }
 
@@ -75,5 +79,11 @@ public class DishItem {
         return DishLangMode.FR.equals(dishLangMode)?getCnPrice():getFrPrice();
     }
 
+    public String getType() {
+        return type;
+    }
 
+    public void setType(String type) {
+        this.type = type;
+    }
 }

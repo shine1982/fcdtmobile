@@ -50,6 +50,10 @@
             android:name=".screen.ShowMenuActivity"
             android:label="@string/title_activity_show_menu" >
         </activity>
+        <activity
+            android:name=".screen.ShowChosenDishesActivity"
+            android:label="@string/title_activity_show_chosen_dishes" >
+        </activity>
     </application>
 
 </manifest>

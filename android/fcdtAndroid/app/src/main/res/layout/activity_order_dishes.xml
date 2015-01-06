@@ -12,10 +12,12 @@
         android:id="@+id/loadingPanel"/>
 
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/orderDishList"
-        android:layout_below="@id/app_bar"/>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/orderDishList"
+            android:layout_below="@id/app_bar"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"/>
 
 </RelativeLayout>
