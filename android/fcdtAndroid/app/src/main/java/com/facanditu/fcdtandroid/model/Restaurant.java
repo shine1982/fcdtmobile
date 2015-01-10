@@ -47,6 +47,9 @@ public class Restaurant extends ParseObject {
 
     public static final String PRICE_SPECIAL="priceSpecial";
 
+    public static final String TRANSPORTATION="metro";
+
+
 
     public String getName() {
         return getString(NAME);
@@ -107,7 +110,9 @@ public class Restaurant extends ParseObject {
     }
 
     public static ParseQuery<Restaurant> getQuery() {
-        return ParseQuery.getQuery(Restaurant.class);
+        ParseQuery<Restaurant> query = ParseQuery.getQuery(Restaurant.class);
+        query.include(TRANSPORTATION);
+        return query;
     }
 
     public static ParseQuery<Restaurant> getQueryFromStr(String str){
@@ -197,6 +202,10 @@ public class Restaurant extends ParseObject {
 
     public String getSpecialRecommandationReason(){
         return getString("recommandationReason");
+    }
+
+    public List<Transportation> getTransportation(){
+        return getList(TRANSPORTATION);
     }
 
 

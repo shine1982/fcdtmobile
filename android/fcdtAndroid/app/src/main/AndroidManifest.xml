@@ -54,6 +54,10 @@
             android:name=".screen.ShowChosenDishesActivity"
             android:label="@string/title_activity_show_chosen_dishes" >
         </activity>
+        <activity
+            android:name=".screen.searchresto.SearchRestoByCatActivity"
+            android:label="@string/title_activity_search_resto_by_cat" >
+        </activity>
     </application>
 
 </manifest>

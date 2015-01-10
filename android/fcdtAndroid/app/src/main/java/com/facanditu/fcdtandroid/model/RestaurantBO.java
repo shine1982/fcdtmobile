@@ -3,9 +3,11 @@ package com.facanditu.fcdtandroid.model;
 
 
 import com.facanditu.fcdtandroid.util.StringUtils;
+import com.parse.ParseObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -26,6 +28,8 @@ public class RestaurantBO implements Serializable {
 
     private List<String> recReasons;
 
+    private List<String> metros;
+
     public RestaurantBO(final Restaurant restaurant){
         this.id=restaurant.getObjectId();
         this.name=restaurant.getName();
@@ -36,6 +40,7 @@ public class RestaurantBO implements Serializable {
         this.openTime=initOpentimeFromResto(restaurant);
         this.price = initPriceFromResto(restaurant);
         this.recReasons = initRecReasons(restaurant);
+        this.metros = initMetros(restaurant);
 
     }
     private static final String T_UNIT=":";
@@ -75,6 +80,17 @@ public class RestaurantBO implements Serializable {
         return recReasons;
     }
 
+    private List<String> initMetros(final Restaurant r){
+
+        metros = new ArrayList<>();
+        List<Transportation> transportations = r.getTransportation();
+        if(transportations!=null){
+            for (Transportation transportation: transportations){
+                metros.add(StringUtils.toString(transportation.getLines(),",")+" : "+transportation.getName());
+            }
+        }
+        return metros;
+    }
     public String getId() {
         return id;
     }
@@ -113,5 +129,8 @@ public class RestaurantBO implements Serializable {
         return recReasons;
     }
 
+    public List<String> getTransportations(){
+        return this.metros;
+    }
 
 }

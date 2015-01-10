@@ -18,5 +18,6 @@
     <string name="title_activity_order_dishes">点菜</string>
     <string name="title_activity_show_menu">菜单</string>
     <string name="title_activity_show_chosen_dishes"></string>
+    <string name="title_activity_search_resto_by_cat">分类查找餐馆</string>
 
 </resources>

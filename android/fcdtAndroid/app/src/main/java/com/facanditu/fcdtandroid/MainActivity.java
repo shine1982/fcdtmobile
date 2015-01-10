@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.facanditu.fcdtandroid.screen.searchresto.SearchNavigator;
+import com.facanditu.fcdtandroid.screen.searchresto.SearchRestoByCatActivity;
 import com.facanditu.fcdtandroid.screen.searchresto.SearchRestosActivity;
 import com.facanditu.fcdtandroid.screen.searchresto.SearchRestosType;
 
@@ -54,6 +55,13 @@ public class MainActivity extends ActionBarActivity {
 
     private void initSearchRestosByCat(MainActivity mainActivity) {
         mSearchByCat=(ImageButton)findViewById(R.id.searchRestosByCat);
+        mSearchByCat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SearchRestoByCatActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initFavButton(final MainActivity mainActivity) {

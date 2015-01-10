@@ -55,7 +55,7 @@ public class NavigationDrawerFragment extends Fragment  implements ExpandableLis
 
     @Override
     public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-        if(SearchRestosType.Fav.name().equals((String) v.getTag())){
+        if(SearchRestosType.Fav.name().equals(v.getTag())){
             SearchNavigator.goTo(getActivity(),SearchRestosType.Fav);
         }
         return false;
@@ -84,7 +84,7 @@ public class NavigationDrawerFragment extends Fragment  implements ExpandableLis
 
         ArrayList<MenuItem> child = new ArrayList<>();
         child.add(new MenuItem(R.drawable.ic_action_place,"按当前位置", SearchRestosType.NearBy.name()));
-        child.add(new MenuItem(R.drawable.ic_business_white_24dp,"按地址",SearchRestosType.Address.name()));
+        child.add(new MenuItem(R.drawable.ic_accueil,"按地址",SearchRestosType.Address.name()));
         child.add(new MenuItem(R.drawable.ic_accueil,"按邮编", SearchRestosType.PostCode.name()));
         child.add(new MenuItem(R.drawable.ic_accueil,"按城市", SearchRestosType.City.name()));
         child.add(new MenuItem(R.drawable.ic_accueil,"按特色标签", SearchRestosType.Tags.name()));

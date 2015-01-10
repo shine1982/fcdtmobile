@@ -58,6 +58,25 @@
         android:layout_marginLeft="10dp">
     </LinearLayout>
 
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text= "公共交通"
+        android:gravity="left"
+        android:id="@+id/transportLabel"
+        android:layout_below="@id/price"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/transport"
+        android:layout_below="@id/price"
+        android:layout_toRightOf="@id/transportLabel"
+        android:layout_marginLeft="10dp">
+    </LinearLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -65,7 +84,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:id="@+id/buttonsPanel"
-        android:layout_below="@id/price"
+        android:layout_below="@id/transport"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -148,5 +167,9 @@
         android:id="@+id/menuFrBtn"
         android:layout_marginLeft="10dp"
         android:textColor="@color/colorPrimary"/>
+    <Space
+        android:layout_below="@id/menuTitle"
+        android:layout_width="1dp"
+        android:layout_height="30dp"/>
 
 </RelativeLayout>

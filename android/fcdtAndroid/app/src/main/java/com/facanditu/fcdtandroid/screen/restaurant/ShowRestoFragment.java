@@ -43,11 +43,13 @@ public class ShowRestoFragment extends Fragment {
     private LinearLayout opentime;
     private LinearLayout price;
     private LinearLayout recReasons;
+    private LinearLayout transportation;
 
     private TextView cnMenu;
     private TextView frMenu;
 
     private RestaurantBoHelper restaurantBoHelper;
+
 
     private View view;
     public ShowRestoFragment() {
@@ -100,6 +102,7 @@ public class ShowRestoFragment extends Fragment {
         setOrderDishesButton();
         setOpenTime();
         setPrice();
+        setTransportation();
         setRecReasons();
         setChAndFrMenuClickAction();
     }
@@ -184,6 +187,11 @@ public class ShowRestoFragment extends Fragment {
         addTextViewToLinerLayout( restaurant.getRecReasons() , recReasons);
     }
 
+    private void setTransportation(){
+        transportation = (LinearLayout)view.findViewById(R.id.transport);
+        addTextViewToLinerLayout( restaurant.getTransportations() , transportation);
+    }
+
     private void addTextViewToLinerLayout(final List<String> strings, final LinearLayout linearLayout){
         for(final String opentimestr : strings ){
             ViewGroup.LayoutParams lparams = new ViewGroup.LayoutParams(
@@ -215,6 +223,8 @@ public class ShowRestoFragment extends Fragment {
             }
         });
     }
+
+
 
     private void startMenuActivity(final DishLangMode dishLangMode){
         Intent intent = new Intent(getActivity(), ShowMenuActivity.class);
