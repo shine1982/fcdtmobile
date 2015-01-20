@@ -1,8 +1,12 @@
 package com.facanditu.fcdtandroid;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -12,10 +16,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.facanditu.fcdtandroid.model.Dish;
+import com.facanditu.fcdtandroid.model.RecReason;
+import com.facanditu.fcdtandroid.model.Restaurant;
+import com.facanditu.fcdtandroid.model.StatCity;
+import com.facanditu.fcdtandroid.model.StatPostalCode;
+import com.facanditu.fcdtandroid.model.StatRecReason;
+import com.facanditu.fcdtandroid.model.StatTable;
+import com.facanditu.fcdtandroid.model.StatTag;
 import com.facanditu.fcdtandroid.screen.searchresto.SearchNavigator;
 import com.facanditu.fcdtandroid.screen.searchresto.SearchRestoByCatActivity;
 import com.facanditu.fcdtandroid.screen.searchresto.SearchRestosActivity;
 import com.facanditu.fcdtandroid.screen.searchresto.SearchRestosType;
+import com.facanditu.fcdtandroid.util.LocalDbIndicator;
+import com.facanditu.fcdtandroid.util.NetworkUtils;
+import com.facanditu.fcdtandroid.util.SharedPreferenceManager;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -47,6 +62,36 @@ public class MainActivity extends ActionBarActivity {
         initFavButton(this);
         initSearchRestosByCat(this);
         initWikiFrCook(this);
+
+        LocalDbIndicator.getIns().setSyncSuccess(true);// par default on lit les données from local db
+        if(NetworkUtils.isOnline(this) && SharedPreferenceManager.isDbMoreThan1DayNotUpdated(this)){
+            synchroDb();
+        }
+    }
+
+
+
+    private void synchroDb(){
+        boolean syncResultResto = Restaurant.synchroLocalDb();
+        boolean syncResultDish = Dish.synchroLocalDb();
+        boolean syncResultStatCity = StatCity.synchroLocalDb();
+        boolean syncResultStatPostalCode = StatPostalCode.synchroLocalDb();
+        boolean syncResultRecReason = RecReason.synchroLocalDb();
+        boolean syncResultStatRecReason = StatRecReason.synchroLocalDb();
+        boolean syncResultStatTag = StatTag.synchroLocalDb();
+
+        boolean syncAllResult = syncResultResto
+                             && syncResultDish
+                             && syncResultStatCity
+                             && syncResultStatPostalCode
+                             && syncResultRecReason
+                             && syncResultStatRecReason
+                             && syncResultStatTag;
+
+        LocalDbIndicator.getIns().setSyncSuccess(syncAllResult);
+        if(syncAllResult){
+            SharedPreferenceManager.setLastUpdateDatabaseDateWithToday(this);
+        }
     }
 
     private void initWikiFrCook(MainActivity mainActivity) {

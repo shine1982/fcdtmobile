@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment {
             task.execute(((RestaurantBO)activity.getIntent().getSerializableExtra("resto")).getId());
         } else {
             message = getResources().getString(R.string.no_internet_connection);
-            showAlertDialog(message, true);
+            showAlertDialog(message, false);
         }
     }
 

@@ -23,6 +23,7 @@ import com.facanditu.fcdtandroid.model.DishItem;
 import com.facanditu.fcdtandroid.model.DishItemHelper;
 import com.facanditu.fcdtandroid.model.DishType;
 import com.facanditu.fcdtandroid.model.Restaurant;
+import com.facanditu.fcdtandroid.util.LocalDbIndicator;
 import com.facanditu.fcdtandroid.util.StringUtils;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -56,7 +57,7 @@ public class ShowMenuActivity extends GenericFcdtActivity {
         final String lang = bundle.getString(LANG);
         final Context thisActivity = this;
 
-        Dish.getQuery(idResto).findInBackground(new FindCallback<Dish>() {
+        Dish.getQuery(idResto, LocalDbIndicator.getIns().isSyncSuccess()).findInBackground(new FindCallback<Dish>() {
             @Override
             public void done(List<Dish> dishs, ParseException e) {
                 final List<DishItem> dishItems = DishItemHelper.convertDishListToDishItemList(dishs);

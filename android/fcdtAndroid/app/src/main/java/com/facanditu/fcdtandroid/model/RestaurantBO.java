@@ -69,10 +69,12 @@ public class RestaurantBO implements Serializable {
     private List<String> initRecReasons(final Restaurant r){
         recReasons = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
-        for (String recR: r.getRecommandations()){
-            sb.append(recR+" ");
-        }
+        if(r.getRecommandations()!=null){
+            for (String recR: r.getRecommandations()){
+                sb.append(recR+" ");
+            }
         recReasons.add(sb.toString());
+        }
         if(!StringUtils.isEmpty(r.getSpecialRecommandationReason())){
             recReasons.add(r.getSpecialRecommandationReason());
         }

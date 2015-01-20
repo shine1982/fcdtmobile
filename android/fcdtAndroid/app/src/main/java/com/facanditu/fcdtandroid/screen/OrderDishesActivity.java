@@ -18,6 +18,7 @@ import com.facanditu.fcdtandroid.R;
 import com.facanditu.fcdtandroid.model.Dish;
 import com.facanditu.fcdtandroid.model.DishItemHelper;
 import com.facanditu.fcdtandroid.model.DishSelectableItem;
+import com.facanditu.fcdtandroid.util.LocalDbIndicator;
 import com.facanditu.fcdtandroid.util.StringUtils;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -47,7 +48,7 @@ public class OrderDishesActivity extends GenericFcdtActivity {
 
         final Context thisActivity = this;
 
-        Dish.getQuery(idResto).findInBackground(new FindCallback<Dish>() {
+        Dish.getQuery(idResto, LocalDbIndicator.getIns().isSyncSuccess()).findInBackground(new FindCallback<Dish>() {
             @Override
             public void done(List<Dish> dishs, ParseException e) {
                 dishItems = DishItemHelper.convertDishListToDishSelectabelItemList(dishs);

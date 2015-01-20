@@ -19,7 +19,8 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -57,6 +58,10 @@
         <activity
             android:name=".screen.searchresto.SearchRestoByCatActivity"
             android:label="@string/title_activity_search_resto_by_cat" >
+        </activity>
+        <activity
+            android:name=".screen.searchresto.SpecifiqueCatActivity"
+            android:label="@string/title_activity_specifique_cat" >
         </activity>
     </application>
 

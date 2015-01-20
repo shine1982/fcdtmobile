@@ -4,7 +4,12 @@ import android.app.Application;
 
 import com.facanditu.fcdtandroid.model.Dish;
 import com.facanditu.fcdtandroid.model.Photo;
+import com.facanditu.fcdtandroid.model.RecReason;
 import com.facanditu.fcdtandroid.model.Restaurant;
+import com.facanditu.fcdtandroid.model.StatCity;
+import com.facanditu.fcdtandroid.model.StatPostalCode;
+import com.facanditu.fcdtandroid.model.StatRecReason;
+import com.facanditu.fcdtandroid.model.StatTag;
 import com.facanditu.fcdtandroid.model.Transportation;
 import com.parse.Parse;
 import com.parse.ParseACL;
@@ -21,11 +26,15 @@ public class FcdtApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        ParseObject.registerSubclass(RecReason.class);
         ParseObject.registerSubclass(Restaurant.class);
         ParseObject.registerSubclass(Photo.class);
         ParseObject.registerSubclass(Dish.class);
         ParseObject.registerSubclass(Transportation.class);
+        ParseObject.registerSubclass(StatCity.class);
+        ParseObject.registerSubclass(StatPostalCode.class);
+        ParseObject.registerSubclass(StatRecReason.class);
+        ParseObject.registerSubclass(StatTag.class);
         Parse.enableLocalDatastore(this);
 
         // Add your initialization code here

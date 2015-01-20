@@ -1,5 +1,7 @@
 package com.facanditu.fcdtandroid.model;
 
+import android.util.Log;
+
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
@@ -48,6 +50,12 @@ public class Restaurant extends ParseObject {
     public static final String PRICE_SPECIAL="priceSpecial";
 
     public static final String TRANSPORTATION="metro";
+
+    public static final String REC_REASONS="recReasons";
+
+    public static final String TAG_LIST="tagList";
+
+    private static final String LOCAL_RESULTS_NAME="restaurants";
 
 
 
@@ -109,10 +117,45 @@ public class Restaurant extends ParseObject {
         return (Restaurant) ParseObject.createWithoutData("Restaurant", idResto);
     }
 
-    public static ParseQuery<Restaurant> getQuery() {
+    private static ParseQuery<Restaurant> getQuery() {
         ParseQuery<Restaurant> query = ParseQuery.getQuery(Restaurant.class);
         query.include(TRANSPORTATION);
+        query.include(REC_REASONS);
         return query;
+    }
+
+    public static ParseQuery<Restaurant> getQuery(boolean withLocalDb){
+        if(withLocalDb){
+            return getLocalQuery();
+        }else {
+            return getQuery();
+        }
+    }
+
+    private static ParseQuery<Restaurant> getLocalQuery() {
+        ParseQuery<Restaurant> query = getQuery();
+        query.fromPin(LOCAL_RESULTS_NAME);
+        return query;
+    }
+
+    public static boolean synchroLocalDb(){
+        ParseQuery<Restaurant> query = Restaurant.getQuery();
+        List<Restaurant> restaurants = null;
+        try {
+             restaurants = query.find();
+        } catch (ParseException e) {}
+        if(restaurants != null){
+            try {
+                Restaurant.unpinAll(LOCAL_RESULTS_NAME);
+                Restaurant.pinAll(LOCAL_RESULTS_NAME, restaurants);
+                Log.d(LOCAL_RESULTS_NAME,"synchroLocalDb succeed!");
+            } catch (ParseException e) {
+                return false;
+            }
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public static ParseQuery<Restaurant> getQueryFromStr(String str){
@@ -186,18 +229,14 @@ public class Restaurant extends ParseObject {
     }
 
     public List<String> getRecommandations(){
-        ParseRelation<ParseObject> recReasonsRelation = getRelation("recReasonsOfResto");
-        try {
-           List<ParseObject> recRecs= recReasonsRelation.getQuery().find();
-           List<String> recStrings = new ArrayList<>();
-           for(ParseObject po: recRecs){
-               recStrings.add(po.getString("label"));
-           }
-            return recStrings;
-        } catch (ParseException e) {
-            e.printStackTrace();
+        List<RecReason> recReasons = getList(REC_REASONS);
+        List<String> recStrings = new ArrayList<>();
+        if(recReasons!=null){
+            for(RecReason recReason:recReasons){
+                recStrings.add(recReason.getLabel());
+            }
         }
-        return null;
+        return recStrings;
     }
 
     public String getSpecialRecommandationReason(){

@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.GridLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,7 +35,15 @@ public class SearchRestoByCatActivity extends GenericFcdtActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(SearchRestoByCatActivity.this,"clicked "+ view.getTag(), Toast.LENGTH_SHORT).show();
+                final SearchRestosType searchType = SearchRestosType.valueOf((String)view.getTag());
+                if(searchType.equals(SearchRestosType.Newest)||searchType.equals(SearchRestosType.Random)){
+                    SearchNavigator.goTo(SearchRestoByCatActivity.this, searchType);
+                }else{
+                    SearchNavigator.goTo(SearchRestoByCatActivity.this, SpecifiqueCatActivity.class,searchType);
+                    //Toast.makeText(SearchRestoByCatActivity.this,"clicked "+ view.getTag(), Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 
@@ -44,6 +53,8 @@ public class SearchRestoByCatActivity extends GenericFcdtActivity {
 
     private List<GenericItemObject> getList(){
         List<GenericItemObject> list = new ArrayList<>();
+        list.add(new GenericItemObject(SearchRestosType.Newest.name(),"最新加入"));
+        list.add(new GenericItemObject(SearchRestosType.Random.name(),"随机浏览"));
         list.add(new GenericItemObject(SearchRestosType.Address.name(),"按地址"));
         list.add(new GenericItemObject(SearchRestosType.PostCode.name(),"按邮编"));
         list.add(new GenericItemObject(SearchRestosType.City.name(),"按城市"));
@@ -51,8 +62,7 @@ public class SearchRestoByCatActivity extends GenericFcdtActivity {
         list.add(new GenericItemObject(SearchRestosType.Price.name(),"按价格"));
         list.add(new GenericItemObject(SearchRestosType.RecReason.name(),"按推荐理由"));
         list.add(new GenericItemObject(SearchRestosType.DishName.name(),"按菜名(中、法)"));
-        list.add(new GenericItemObject(SearchRestosType.Random.name(),"随机浏览"));
-        list.add(new GenericItemObject(SearchRestosType.Newest.name(),"最新加入"));
+        list.add(new GenericItemObject(SearchRestosType.Metro.name(),"按地铁"));
         return list;
     }
 

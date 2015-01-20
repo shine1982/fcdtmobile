@@ -18,6 +18,7 @@ import com.facanditu.fcdtandroid.model.Restaurant;
 import com.facanditu.fcdtandroid.model.RestaurantBO;
 import com.facanditu.fcdtandroid.screen.restaurant.RestaurantMainActivity;
 import com.facanditu.fcdtandroid.util.GeoUtils;
+import com.facanditu.fcdtandroid.util.LocalDbIndicator;
 import com.facanditu.fcdtandroid.util.LocationUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -75,7 +76,7 @@ public class GeoLocHelper implements GoogleApiClient.ConnectionCallbacks, Google
                         new ParseQueryAdapter.QueryFactory<Restaurant>() {
                             public ParseQuery<Restaurant> create() {
 
-                                ParseQuery<Restaurant> query = Restaurant.getQuery();
+                                ParseQuery<Restaurant> query = Restaurant.getQuery(LocalDbIndicator.getIns().isSyncSuccess());
                                 query.whereNear(Restaurant.LOCATION, GeoUtils.geoPointFromLocation(mCurrentLocation));
                                 return query;
                             }
