@@ -1,15 +1,10 @@
 package com.facanditu.fcdtandroid;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.Image;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,14 +17,11 @@ import com.facanditu.fcdtandroid.model.Restaurant;
 import com.facanditu.fcdtandroid.model.StatCity;
 import com.facanditu.fcdtandroid.model.StatPostalCode;
 import com.facanditu.fcdtandroid.model.StatRecReason;
-import com.facanditu.fcdtandroid.model.StatTable;
 import com.facanditu.fcdtandroid.model.StatTag;
 import com.facanditu.fcdtandroid.screen.searchresto.SearchNavigator;
 import com.facanditu.fcdtandroid.screen.searchresto.SearchRestoByCatActivity;
-import com.facanditu.fcdtandroid.screen.searchresto.SearchRestosActivity;
 import com.facanditu.fcdtandroid.screen.searchresto.SearchRestosType;
 import com.facanditu.fcdtandroid.util.LocalDbIndicator;
-import com.facanditu.fcdtandroid.util.NetworkUtils;
 import com.facanditu.fcdtandroid.util.SharedPreferenceManager;
 
 
@@ -63,10 +55,11 @@ public class MainActivity extends ActionBarActivity {
         initSearchRestosByCat(this);
         initWikiFrCook(this);
 
-        LocalDbIndicator.getIns().setSyncSuccess(true);// par default on lit les données from local db
+        LocalDbIndicator.getIns().setSyncSuccess(false);// par default on lit les données from local db
+       /*
         if(NetworkUtils.isOnline(this) && SharedPreferenceManager.isDbMoreThan1DayNotUpdated(this)){
             synchroDb();
-        }
+        }*/
     }
 
 

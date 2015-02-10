@@ -2,6 +2,7 @@ package com.facanditu.fcdtandroid.screen.searchresto;
 
 import android.app.Activity;
 
+import com.facanditu.fcdtandroid.model.PriceCriteria;
 import com.facanditu.fcdtandroid.model.RecReason;
 import com.facanditu.fcdtandroid.model.Restaurant;
 import com.facanditu.fcdtandroid.util.FavRestoManager;
@@ -50,8 +51,12 @@ public class RestaurantQueryFactory implements ParseQueryAdapter.QueryFactory<Re
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
             query.whereEqualTo(Restaurant.REC_REASONS, recReason);
+
+        }else if(SearchRestosType.Price.equals(searchType)){
+            PriceCriteria priceCriteria = PriceCriteria.getCriteria(context.getIntent().getStringExtra(SearchNavigator.ARG0));
+            query.whereLessThanOrEqualTo(Restaurant.PRICE_NOON,priceCriteria.getMax());
+            query.whereGreaterThanOrEqualTo(Restaurant.PRICE_NOON, priceCriteria.getMin());
         }
 
 

@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.facanditu.fcdtandroid.R;
 import com.facanditu.fcdtandroid.model.GenericItemObject;
+import com.facanditu.fcdtandroid.model.PriceCriteria;
 import com.facanditu.fcdtandroid.model.Restaurant;
 import com.facanditu.fcdtandroid.model.StatCity;
 import com.facanditu.fcdtandroid.model.StatPostalCode;
@@ -48,7 +49,9 @@ public class SpecifiqueCatActivity extends GenericFcdtActivity {
                 if(searchRestosType.equals(SearchRestosType.City)
                         ||searchRestosType.equals(SearchRestosType.PostCode)
                         ||searchRestosType.equals(SearchRestosType.Tags)
-                        ||searchRestosType.equals(SearchRestosType.RecReason)){
+                        ||searchRestosType.equals(SearchRestosType.RecReason)
+                        ||searchRestosType.equals(SearchRestosType.Price)
+                        ){
                     SearchNavigator.goTo(SpecifiqueCatActivity.this, searchRestosType, argu1);
                 }
 
@@ -73,6 +76,8 @@ public class SpecifiqueCatActivity extends GenericFcdtActivity {
             getTagList(list);
         }else if(SearchRestosType.RecReason.equals(searchRestosType)){
             getRecReasonList(list);
+        }else if(SearchRestosType.Price.equals(searchRestosType)){
+            getPriceCreteriaList(list);
         }
 
         return list;
@@ -123,6 +128,12 @@ public class SpecifiqueCatActivity extends GenericFcdtActivity {
             for(StatTag stat:stats){
                 list.add(new GenericItemObject(stat.getValue(), stat.getValue()+" ("+stat.getCount()+")"));
             }
+        }
+    }
+
+    private void getPriceCreteriaList(List<GenericItemObject> list) {
+        for(PriceCriteria stat: PriceCriteria.values()){
+            list.add(new GenericItemObject(stat.getLabel(), stat.getLabel()));
         }
     }
 

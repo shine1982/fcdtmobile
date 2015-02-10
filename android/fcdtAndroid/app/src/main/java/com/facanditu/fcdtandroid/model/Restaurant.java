@@ -55,7 +55,7 @@ public class Restaurant extends ParseObject {
 
     public static final String TAG_LIST="tagList";
 
-    private static final String LOCAL_RESULTS_NAME="restaurants";
+    private static final String LOCAL_RESULTS_NAME="localRestaurants";
 
 
 
@@ -216,12 +216,12 @@ public class Restaurant extends ParseObject {
         return getString(OPENTIME_EXCEPTION);
     }
 
-    public String getPriceNoon(){
-        return getString(PRICE_NOON);
+    public int getPriceNoon(){
+        return getInt(PRICE_NOON);
     }
 
-    public String getPriceEvening(){
-        return getString(PRICE_EVENING);
+    public int getPriceEvening(){
+        return getInt(PRICE_EVENING);
     }
 
     public String getPriceSpecial(){
